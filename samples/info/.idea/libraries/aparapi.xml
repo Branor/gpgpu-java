@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="aparapi">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../.." />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$PROJECT_DIR$/../../api" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../add/src" />
+      <root url="file://$PROJECT_DIR$/src" />
+      <root url="file://$PROJECT_DIR$/../life/src" />
+      <root url="file://$PROJECT_DIR$/../mandel/src" />
+      <root url="file://$PROJECT_DIR$/../squares/src" />
+      <root url="file://$PROJECT_DIR$/../extension/src" />
+      <root url="file://$PROJECT_DIR$/../convolution/src" />
+      <root url="file://$PROJECT_DIR$/../blackscholes/src" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../.." recursive="false" />
+  </library>
+</component>
