@@ -92,26 +92,19 @@ public class Main {
     public static class LifeKernel extends Kernel {
 
         private static final int ALIVE = 0xffffff;
-
         private static final int DEAD = 0;
-
         private final int[] imageData;
-
         private final int width;
-
         private final int height;
-
         private final Range range;
-
         private int fromBase;
-
         private int toBase;
 
         public LifeKernel(int _width, int _height, BufferedImage _image) {
             imageData = ((DataBufferInt) _image.getRaster().getDataBuffer()).getData();
             width = _width;
             height = _height;
-            if (System.getProperty("com.amd.aparapi.executionMode").equals("JTP")) {
+            if (System.getProperty("com.amd.aparapi.executionMode", "GPU").equals("JTP")) {
                 range = Range.create(width * height, 4);
             } else {
                 range = Range.create(width * height);
@@ -119,7 +112,7 @@ public class Main {
             System.out.println("range = " + range);
             fromBase = height * width;
             toBase = 0;
-            setExplicit(true); // This gives us a performance boost
+            setExplicit(true); // Enable explicit memory buffer management, this gives us a performance boost
 
             /** draw a line across the image **/
             for (int i = width * (height / 2) + width / 10; i < width * (height / 2 + 1) - width / 10; i++) {
@@ -132,7 +125,7 @@ public class Main {
 //                imageData[i] = random.nextInt(2);
 //            }
 
-            put(imageData); // Because we are using explicit buffer management we must put the imageData array
+            put(imageData); // Copy memory buffer to GPU. Because we are using explicit buffer management we must put the imageData array
         }
 
         public void processPixel(int gid) {
@@ -185,6 +178,7 @@ public class Main {
 
             } else {
                 execute(range);
+                //System.out.println(getExecutionMode().toString());
             }
 
         }
@@ -192,7 +186,7 @@ public class Main {
     }
 
     static boolean running = false;
-    private static final float FONT_SIZE = 64.0f;
+    private static final float FONT_SIZE = 36.0f;
 
     public static void main(String[] _args) {
 
